@@ -1,0 +1,240 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// -----------------------------
+// ユーザー・目標
+// -----------------------------
+
+model User {
+  id             String   @id @default(uuid())
+  email          String   @unique
+  name           String?
+  sex            Sex?
+  birthDate      DateTime? @map("birth_date")
+  heightCm       Float?    @map("height_cm")
+  activityLevel  ActivityLevel? @map("activity_level")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  goals          Goal[]
+  mealLogs       MealLog[]
+  exerciseLogs   ExerciseLog[]
+  advisorMessages AdvisorMessage[]
+
+  @@map("users")
+}
+
+enum Sex {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum ActivityLevel {
+  LOW
+  MODERATE
+  HIGH
+}
+
+model Goal {
+  id               String   @id @default(uuid())
+  userId           String   @map("user_id")
+  user             User     @relation(fields: [userId], references: [id])
+  type             GoalType
+  targetWeightKg   Float?   @map("target_weight_kg")
+  targetDate       DateTime? @map("target_date")
+  dailyKcalTarget  Int      @map("daily_kcal_target")
+  pfcRatioProtein  Float    @map("pfc_ratio_protein")
+  pfcRatioFat      Float    @map("pfc_ratio_fat")
+  pfcRatioCarb     Float    @map("pfc_ratio_carb")
+  dailyStepsTarget Int?     @map("daily_steps_target")
+  isActive         Boolean  @default(true) @map("is_active")
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  @@map("goals")
+}
+
+enum GoalType {
+  LOSE_WEIGHT     // 減量
+  GAIN_WEIGHT     // 増量
+  MAINTAIN        // 維持
+  BUILD_MUSCLE    // 筋肉増強
+}
+
+// -----------------------------
+// 食品成分表マスタ
+// -----------------------------
+
+model FoodItem {
+  id          String   @id @default(uuid())
+  source      FoodSource @default(MEXT)
+  name        String
+  nameKana    String?  @map("name_kana")
+
+  kcalPer100g Float    @map("kcal_per100g")
+  proteinG    Float    @map("protein_g")
+  fatG        Float    @map("fat_g")
+  carbG       Float    @map("carb_g")
+  fiberG      Float?   @map("fiber_g")
+  sugarG      Float?   @map("sugar_g")
+  saltG       Float?   @map("salt_g")
+
+  // ビタミン (100gあたり, 単位はmg/µgが混在するためnutrition.ts側で単位を管理)
+  vitaminA        Float? @map("vitamin_a")
+  vitaminD        Float? @map("vitamin_d")
+  vitaminE        Float? @map("vitamin_e")
+  vitaminK        Float? @map("vitamin_k")
+  vitaminB1       Float? @map("vitamin_b1")
+  vitaminB2       Float? @map("vitamin_b2")
+  vitaminB6       Float? @map("vitamin_b6")
+  vitaminB12      Float? @map("vitamin_b12")
+  vitaminC        Float? @map("vitamin_c")
+  niacin          Float?
+  folate          Float?
+  pantothenicAcid Float? @map("pantothenic_acid")
+
+  // ミネラル (100gあたり)
+  sodium    Float?
+  potassium Float?
+  calcium   Float?
+  magnesium Float?
+  phosphorus Float?
+  iron      Float?
+  zinc      Float?
+  copper    Float?
+  manganese Float?
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  mealItems MealItem[]
+
+  @@index([name])
+  @@map("food_items")
+}
+
+enum FoodSource {
+  MEXT   // 日本食品標準成分表
+  CUSTOM // ユーザー独自登録
+}
+
+// -----------------------------
+// 食事記録
+// -----------------------------
+
+model MealLog {
+  id          String      @id @default(uuid())
+  userId      String      @map("user_id")
+  user        User        @relation(fields: [userId], references: [id])
+  loggedAt    DateTime    @map("logged_at")
+  mealType    MealType    @map("meal_type")
+  inputMethod InputMethod @map("input_method")
+  photoUrl    String?     @map("photo_url")
+  rawText     String?     @map("raw_text")
+  status      MealStatus  @default(PENDING)
+  createdAt   DateTime    @default(now()) @map("created_at")
+
+  items       MealItem[]
+
+  @@index([userId, loggedAt])
+  @@map("meal_logs")
+}
+
+enum MealType {
+  BREAKFAST
+  LUNCH
+  DINNER
+  SNACK
+}
+
+enum InputMethod {
+  TEXT
+  PHOTO
+}
+
+enum MealStatus {
+  PENDING   // AI認識結果の確認待ち
+  CONFIRMED // ユーザー確定済み
+}
+
+model MealItem {
+  id                     String   @id @default(uuid())
+  mealLogId              String   @map("meal_log_id")
+  mealLog                MealLog  @relation(fields: [mealLogId], references: [id], onDelete: Cascade)
+  foodItemId             String?  @map("food_item_id")
+  foodItem               FoodItem? @relation(fields: [foodItemId], references: [id])
+  foodNameRaw            String   @map("food_name_raw")
+  estimatedGrams         Float    @map("estimated_grams")
+  confirmedGrams         Float?   @map("confirmed_grams")
+  recognitionConfidence  Float?   @map("recognition_confidence")
+
+  @@map("meal_items")
+}
+
+// -----------------------------
+// 運動記録
+// -----------------------------
+
+model ExerciseLog {
+  id              String        @id @default(uuid())
+  userId          String        @map("user_id")
+  user            User          @relation(fields: [userId], references: [id])
+  loggedAt        DateTime      @map("logged_at")
+  type            String
+  durationMin     Int?          @map("duration_min")
+  caloriesBurned  Float?        @map("calories_burned")
+  source          ExerciseSource @default(MANUAL)
+  steps           Int?
+
+  @@index([userId, loggedAt])
+  @@map("exercise_logs")
+}
+
+enum ExerciseSource {
+  MANUAL
+  HEALTHKIT
+}
+
+// -----------------------------
+// キャラクターアドバイザー
+// -----------------------------
+
+model AdvisorMessage {
+  id          String         @id @default(uuid())
+  userId      String         @map("user_id")
+  user        User           @relation(fields: [userId], references: [id])
+  targetDate  DateTime       @map("target_date")
+  trigger     AdvisorTrigger
+  messageText String         @map("message_text")
+  generatedAt DateTime       @default(now()) @map("generated_at")
+
+  @@index([userId, targetDate])
+  @@map("advisor_messages")
+}
+
+enum AdvisorTrigger {
+  DAILY
+  WEEKLY
+  MONTHLY
+  GOAL_EVENT
+}
+
+// -----------------------------
+// 食事摂取基準マスタ
+// -----------------------------
+
+model RdaReference {
+  id       String  @id @default(uuid())
+  ageBand  String  @map("age_band") // 例: "18-29"
+  sex      Sex
+  nutrient String  // 例: "vitamin_c", "iron"
+  rdaValue Float   @map("rda_value")
+  unit     String  // 例: "mg", "µg"
+
+  @@unique([ageBand, sex, nutrient])
+  @@map("rda_reference")
+}

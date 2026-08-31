@@ -1,0 +1,142 @@
+[
+  {
+    "name": "精白米ごはん",
+    "nameKana": "せいはくまいごはん",
+    "kcalPer100g": 156, "proteinG": 2.5, "fatG": 0.3, "carbG": 37.1, "fiberG": 1.5, "sugarG": 0, "saltG": 0,
+    "vitaminB1": 0.02, "vitaminB2": 0.01, "niacin": 0.2, "folate": 3,
+    "sodium": 1, "potassium": 29, "calcium": 3, "magnesium": 7, "phosphorus": 34, "iron": 0.1, "zinc": 0.6
+  },
+  {
+    "name": "食パン",
+    "nameKana": "しょくぱん",
+    "kcalPer100g": 248, "proteinG": 8.9, "fatG": 4.1, "carbG": 46.4, "fiberG": 2.3, "sugarG": 4.5, "saltG": 1.2,
+    "vitaminB1": 0.07, "vitaminB2": 0.05, "niacin": 1.1, "folate": 30,
+    "sodium": 470, "potassium": 97, "calcium": 29, "magnesium": 18, "phosphorus": 67, "iron": 0.6, "zinc": 0.6
+  },
+  {
+    "name": "鶏むね肉(皮なし・生)",
+    "nameKana": "とりむねにく",
+    "kcalPer100g": 108, "proteinG": 22.3, "fatG": 1.5, "carbG": 0.1, "fiberG": 0, "sugarG": 0, "saltG": 0.1,
+    "vitaminA": 9, "vitaminB1": 0.09, "vitaminB2": 0.1, "vitaminB6": 0.54, "niacin": 11.6, "folate": 12,
+    "sodium": 40, "potassium": 350, "calcium": 4, "magnesium": 27, "phosphorus": 200, "iron": 0.3, "zinc": 0.6
+  },
+  {
+    "name": "鶏もも肉(皮つき・生)",
+    "nameKana": "とりももにく",
+    "kcalPer100g": 190, "proteinG": 16.6, "fatG": 14.0, "carbG": 0, "fiberG": 0, "sugarG": 0, "saltG": 0.1,
+    "vitaminA": 40, "vitaminB1": 0.1, "vitaminB2": 0.15, "niacin": 5.5, "folate": 13,
+    "sodium": 55, "potassium": 290, "calcium": 5, "magnesium": 21, "phosphorus": 170, "iron": 0.6, "zinc": 1.6
+  },
+  {
+    "name": "豚ロース(赤身・生)",
+    "nameKana": "ぶたろーす",
+    "kcalPer100g": 150, "proteinG": 22.9, "fatG": 5.6, "carbG": 0.2, "fiberG": 0, "sugarG": 0, "saltG": 0.1,
+    "vitaminB1": 0.75, "vitaminB2": 0.23, "niacin": 6.6, "folate": 2,
+    "sodium": 42, "potassium": 310, "calcium": 4, "magnesium": 24, "phosphorus": 210, "iron": 0.6, "zinc": 1.6
+  },
+  {
+    "name": "卵(全卵・生)",
+    "nameKana": "たまご",
+    "kcalPer100g": 142, "proteinG": 12.2, "fatG": 10.2, "carbG": 0.4, "fiberG": 0, "sugarG": 0.4, "saltG": 0.4,
+    "vitaminA": 150, "vitaminD": 1.8, "vitaminE": 1.0, "vitaminB2": 0.37, "vitaminB12": 0.9, "folate": 43,
+    "sodium": 140, "potassium": 130, "calcium": 46, "magnesium": 10, "phosphorus": 170, "iron": 1.5, "zinc": 1.1
+  },
+  {
+    "name": "木綿豆腐",
+    "nameKana": "もめんどうふ",
+    "kcalPer100g": 73, "proteinG": 6.7, "fatG": 4.5, "carbG": 1.6, "fiberG": 0.4, "sugarG": 0.8, "saltG": 0,
+    "vitaminE": 0.2, "vitaminB1": 0.09, "folate": 12,
+    "sodium": 9, "potassium": 110, "calcium": 86, "magnesium": 57, "phosphorus": 88, "iron": 0.9, "zinc": 0.6
+  },
+  {
+    "name": "納豆",
+    "nameKana": "なっとう",
+    "kcalPer100g": 190, "proteinG": 16.5, "fatG": 10.0, "carbG": 12.1, "fiberG": 6.7, "sugarG": 2.2, "saltG": 0,
+    "vitaminK": 600, "vitaminB2": 0.56, "folate": 120,
+    "sodium": 2, "potassium": 660, "calcium": 90, "magnesium": 100, "phosphorus": 190, "iron": 3.3, "zinc": 1.9
+  },
+  {
+    "name": "サケ(生)",
+    "nameKana": "さけ",
+    "kcalPer100g": 133, "proteinG": 22.3, "fatG": 4.1, "carbG": 0.1, "fiberG": 0, "sugarG": 0, "saltG": 0.2,
+    "vitaminD": 32, "vitaminE": 1.2, "vitaminB12": 5.9, "niacin": 6.7,
+    "sodium": 66, "potassium": 350, "calcium": 14, "magnesium": 28, "phosphorus": 240, "iron": 0.5, "zinc": 0.5
+  },
+  {
+    "name": "サバ(生)",
+    "nameKana": "さば",
+    "kcalPer100g": 211, "proteinG": 20.6, "fatG": 16.8, "carbG": 0.3, "fiberG": 0, "sugarG": 0, "saltG": 0.3,
+    "vitaminD": 5.1, "vitaminE": 1.3, "vitaminB12": 13, "niacin": 11.7,
+    "sodium": 110, "potassium": 330, "calcium": 6, "magnesium": 30, "phosphorus": 220, "iron": 1.2, "zinc": 1.1
+  },
+  {
+    "name": "ブロッコリー(生)",
+    "nameKana": "ぶろっこりー",
+    "kcalPer100g": 37, "proteinG": 4.3, "fatG": 0.5, "carbG": 6.6, "fiberG": 4.4, "sugarG": 1.7, "saltG": 0,
+    "vitaminA": 75, "vitaminC": 140, "vitaminK": 210, "vitaminB6": 0.27, "folate": 220,
+    "sodium": 7, "potassium": 460, "calcium": 50, "magnesium": 29, "phosphorus": 110, "iron": 1.3, "zinc": 0.8
+  },
+  {
+    "name": "ほうれん草(生)",
+    "nameKana": "ほうれんそう",
+    "kcalPer100g": 20, "proteinG": 2.2, "fatG": 0.4, "carbG": 3.1, "fiberG": 2.8, "sugarG": 0.4, "saltG": 0,
+    "vitaminA": 350, "vitaminC": 35, "vitaminK": 270, "folate": 210,
+    "sodium": 16, "potassium": 690, "calcium": 49, "magnesium": 69, "phosphorus": 47, "iron": 2.0, "zinc": 0.7
+  },
+  {
+    "name": "にんじん(生)",
+    "nameKana": "にんじん",
+    "kcalPer100g": 35, "proteinG": 0.7, "fatG": 0.2, "carbG": 8.7, "fiberG": 2.4, "sugarG": 4.7, "saltG": 0,
+    "vitaminA": 720, "vitaminC": 6, "folate": 21,
+    "sodium": 28, "potassium": 300, "calcium": 26, "magnesium": 10, "phosphorus": 26, "iron": 0.2, "zinc": 0.2
+  },
+  {
+    "name": "キャベツ(生)",
+    "nameKana": "きゃべつ",
+    "kcalPer100g": 21, "proteinG": 1.3, "fatG": 0.2, "carbG": 5.2, "fiberG": 1.8, "sugarG": 3.3, "saltG": 0,
+    "vitaminC": 41, "vitaminK": 78, "folate": 78,
+    "sodium": 5, "potassium": 200, "calcium": 43, "magnesium": 14, "phosphorus": 27, "iron": 0.3, "zinc": 0.2
+  },
+  {
+    "name": "トマト(生)",
+    "nameKana": "とまと",
+    "kcalPer100g": 20, "proteinG": 0.7, "fatG": 0.1, "carbG": 4.7, "fiberG": 1.0, "sugarG": 3.1, "saltG": 0,
+    "vitaminA": 45, "vitaminC": 15, "folate": 22,
+    "sodium": 3, "potassium": 210, "calcium": 7, "magnesium": 9, "phosphorus": 26, "iron": 0.2, "zinc": 0.1
+  },
+  {
+    "name": "バナナ",
+    "nameKana": "ばなな",
+    "kcalPer100g": 93, "proteinG": 1.1, "fatG": 0.2, "carbG": 22.5, "fiberG": 1.1, "sugarG": 19.4, "saltG": 0,
+    "vitaminC": 16, "vitaminB6": 0.38, "folate": 26,
+    "sodium": 0, "potassium": 360, "calcium": 6, "magnesium": 32, "phosphorus": 27, "iron": 0.3, "zinc": 0.2
+  },
+  {
+    "name": "りんご",
+    "nameKana": "りんご",
+    "kcalPer100g": 53, "proteinG": 0.1, "fatG": 0.1, "carbG": 15.5, "fiberG": 1.4, "sugarG": 12.4, "saltG": 0,
+    "vitaminC": 4, "folate": 2,
+    "sodium": 1, "potassium": 120, "calcium": 3, "magnesium": 3, "phosphorus": 10, "iron": 0.1, "zinc": 0.1
+  },
+  {
+    "name": "牛乳",
+    "nameKana": "ぎゅうにゅう",
+    "kcalPer100g": 61, "proteinG": 3.3, "fatG": 3.8, "carbG": 4.8, "fiberG": 0, "sugarG": 4.8, "saltG": 0.1,
+    "vitaminA": 38, "vitaminD": 0.3, "vitaminB2": 0.15, "vitaminB12": 0.3,
+    "sodium": 41, "potassium": 150, "calcium": 110, "magnesium": 10, "phosphorus": 93, "zinc": 0.4
+  },
+  {
+    "name": "ヨーグルト(無糖)",
+    "nameKana": "よーぐると",
+    "kcalPer100g": 56, "proteinG": 3.6, "fatG": 3.0, "carbG": 4.9, "fiberG": 0, "sugarG": 4.9, "saltG": 0.1,
+    "vitaminA": 33, "vitaminB2": 0.14, "vitaminB12": 0.1,
+    "sodium": 48, "potassium": 170, "calcium": 120, "magnesium": 12, "phosphorus": 100, "zinc": 0.4
+  },
+  {
+    "name": "みそ",
+    "nameKana": "みそ",
+    "kcalPer100g": 192, "proteinG": 12.5, "fatG": 6.0, "carbG": 21.9, "fiberG": 5.4, "sugarG": 8.0, "saltG": 12.4,
+    "vitaminB2": 0.1, "vitaminK": 8, "folate": 41,
+    "sodium": 4900, "potassium": 380, "calcium": 100, "magnesium": 75, "phosphorus": 170, "iron": 4.0, "zinc": 1.1
+  }
+]
