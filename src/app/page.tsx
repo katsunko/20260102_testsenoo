@@ -5,6 +5,7 @@ import { PfcChart } from "@/components/PfcChart";
 import { RdaProgressList } from "@/components/RdaProgressList";
 import { AdvisorMessageCard } from "@/components/AdvisorMessageCard";
 import type { RecommendationResponse, SummaryResponse } from "@/types";
+import { NUTRIENT_LABELS } from "@/types";
 
 function today(): string {
   return new Date().toISOString().slice(0, 10);
@@ -84,8 +85,8 @@ export default function DashboardPage() {
               <ul className="space-y-2">
                 {recommendation.foodRecommendations.map((rec) => (
                   <li key={rec.nutrient} className="text-sm text-gray-800">
-                    <span className="font-medium">{rec.nutrient}</span> が充足率{rec.percent}%と不足気味。
-                    おすすめ: {rec.foods.map((f) => f.foodName).join("、")}
+                    <span className="font-medium">{NUTRIENT_LABELS[rec.nutrient] ?? rec.nutrient}</span>{" "}
+                    が充足率{rec.percent}%と不足気味。 おすすめ: {rec.foods.map((f) => f.foodName).join("、")}
                   </li>
                 ))}
               </ul>

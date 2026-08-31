@@ -64,7 +64,7 @@ export default function HistoryPage() {
           </section>
 
           <section className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
-            <h2 className="mb-3 text-sm font-semibold text-gray-700">ビタミン・ミネラル充足率(期間合計 / RDA)</h2>
+            <h2 className="mb-3 text-sm font-semibold text-gray-700">ビタミン・ミネラル充足率(1日あたり平均 / RDA)</h2>
             <RdaProgressList items={summary.rdaProgress} />
           </section>
         </>

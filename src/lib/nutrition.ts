@@ -141,6 +141,16 @@ export function sumNutrientTotals(totalsList: NutrientTotals[]): NutrientTotals 
   return sum;
 }
 
+/** 期間合計を日数で割り、1日あたりの平均値にする(週/月のRDA充足率判定に使用)。 */
+export function averageNutrientTotals(totals: NutrientTotals, days: number): NutrientTotals {
+  const divisor = days > 0 ? days : 1;
+  const avg = { ...totals };
+  for (const key of Object.keys(avg) as (keyof NutrientTotals)[]) {
+    avg[key] = totals[key] / divisor;
+  }
+  return avg;
+}
+
 export type PfcBalance = {
   proteinKcal: number;
   fatKcal: number;

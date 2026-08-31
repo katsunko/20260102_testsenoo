@@ -1,6 +1,13 @@
 import { prisma } from "./prisma";
 import { getDateRange, splitIntoDays, type SummaryRange } from "./date-range";
-import { calcNutrientsForGrams, calcPfcBalance, calcRdaProgress, getAgeBand, sumNutrientTotals } from "./nutrition";
+import {
+  averageNutrientTotals,
+  calcNutrientsForGrams,
+  calcPfcBalance,
+  calcRdaProgress,
+  getAgeBand,
+  sumNutrientTotals,
+} from "./nutrition";
 
 export async function computeSummary(userId: string, range: SummaryRange, baseDate: Date) {
   const { start, end } = getDateRange(range, baseDate);
@@ -28,7 +35,10 @@ export async function computeSummary(userId: string, range: SummaryRange, baseDa
   const rdaTargets = await prisma.rdaReference.findMany({
     where: { ageBand, sex: user?.sex ?? "MALE" },
   });
-  const rdaProgress = calcRdaProgress(totals, rdaTargets);
+  // RDAは1日あたりの基準値のため、週/月では期間合計を日数で割った1日平均で充足率を判定する。
+  const daysInRange = Math.max(1, Math.round((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)));
+  const dailyAverageTotals = averageNutrientTotals(totals, daysInRange);
+  const rdaProgress = calcRdaProgress(dailyAverageTotals, rdaTargets);
 
   const dailyBreakdown = splitIntoDays(start, end).map((day) => {
     const dayEnd = new Date(day);
