@@ -2,15 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { parseMealTextWithClaude } from "@/lib/anthropic";
+import { buildMealDraftItems } from "@/lib/meal-draft";
 
 const bodySchema = z.object({ rawText: z.string().min(1) });
-
-export type MealDraftItem = {
-  foodNameRaw: string;
-  estimatedGrams: number;
-  foodItemId: string | null;
-  matchedFoodName: string | null;
-};
 
 export async function POST(request: NextRequest) {
   const parsed = bodySchema.safeParse(await request.json());
@@ -25,18 +19,7 @@ export async function POST(request: NextRequest) {
     aiItems?.map((item) => ({ name: item.name, grams: item.grams })) ??
     (await naiveExtractFoodNames(rawText));
 
-  const draftItems: MealDraftItem[] = [];
-  for (const candidate of candidateNames) {
-    const match = await prisma.foodItem.findFirst({
-      where: { name: { contains: candidate.name, mode: "insensitive" } },
-    });
-    draftItems.push({
-      foodNameRaw: candidate.name,
-      estimatedGrams: candidate.grams,
-      foodItemId: match?.id ?? null,
-      matchedFoodName: match?.name ?? null,
-    });
-  }
+  const draftItems = await buildMealDraftItems(candidateNames);
 
   return NextResponse.json({ items: draftItems, aiUsed: aiItems !== null });
 }

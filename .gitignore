@@ -24,3 +24,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# uploaded meal photos (ローカルディスク保存先。本番はSupabase Storage等に置き換え)
+/public/uploads/meals/*
+!/public/uploads/meals/.gitkeep

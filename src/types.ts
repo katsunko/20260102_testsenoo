@@ -69,6 +69,7 @@ export type MealLog = {
   mealType: "BREAKFAST" | "LUNCH" | "DINNER" | "SNACK";
   inputMethod: "TEXT" | "PHOTO";
   status: "PENDING" | "CONFIRMED";
+  photoUrl: string | null;
   items: MealItem[];
 };
 

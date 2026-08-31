@@ -5,15 +5,17 @@
 
 設計の詳細は [docs/DESIGN.md](./docs/DESIGN.md) を参照。
 
-## 現在の実装状況(Phase 1)
+## 現在の実装状況(Phase 1〜3)
 
 - 食事記録(テキスト入力、Claude APIによる食品・分量抽出 + 未設定時のフォールバック)
-- PFC・ビタミン・ミネラルの自動計算、日/週/月サマリー
+- 食事記録(写真アップロード、Claude Vision APIによる食品・分量推定 + 確認・補正UI)
+- PFC・ビタミン・ミネラルの自動計算、日/週/月サマリー(週/月は1日あたり平均でRDA判定)
 - 目標設定(カロリー・PFC比率・目標体重・目標歩数)
-- キャラクターアドバイザー(Claude API未設定時はルールベースのフォールバックメッセージ)
+- キャラクターアドバイザー「碧井コーチ」(Claude API未設定時はルールベースのフォールバックメッセージ)
 - 食事・運動レコメンド(不足栄養素に応じた食品提案、カロリー超過分の運動時間換算)
 
-写真解析(Vision LLM)とiPhoneヘルスケア連携は未実装(`docs/DESIGN.md` のPhase3, 6を参照)。
+写真は`public/uploads/meals`にローカル保存する簡易実装(本番はSupabase Storage等への差し替えを想定、`src/lib/storage.ts`)。
+iPhoneヘルスケア連携は未実装(`docs/DESIGN.md` のPhase6を参照)。
 
 ## セットアップ
 
@@ -32,7 +34,7 @@ cp .env.example .env
 ```
 
 - `DATABASE_URL`: PostgreSQL接続文字列(Supabase推奨。ローカルPostgresでも可)
-- `ANTHROPIC_API_KEY`: 未設定でも動作するが、その場合は食品解析・アドバイスがルールベースのフォールバックになる
+- `ANTHROPIC_API_KEY`: 未設定でも動作するが、その場合はテキスト食事解析・アドバイスがルールベースのフォールバックになる(写真解析はAPIキーが必須)
 - `DEFAULT_USER_ID`: Phase1では単一ユーザー前提のため固定IDを使用
 
 ### 3. データベースのセットアップ
