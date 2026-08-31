@@ -34,6 +34,7 @@ const RDA_TABLE: RdaRow[] = [
   { nutrient: "potassium", unit: "mg", male: 2500, female: () => 2000 },
   // 食塩相当量は「上限目標値」。他の栄養素と意味が異なる点に注意(超過を警告する用途)。
   { nutrient: "salt_g", unit: "g", male: 7.5, female: () => 6.5 },
+  { nutrient: "fiber_g", unit: "g", male: 21, female: () => 18 },
 ];
 
 async function seedFoodItems() {

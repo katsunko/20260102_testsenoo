@@ -120,4 +120,27 @@ export const NUTRIENT_LABELS: Record<string, string> = {
   magnesium: "マグネシウム",
   potassium: "カリウム",
   salt_g: "食塩相当量",
+  fiber_g: "食物繊維",
 };
+
+export const NUTRIENT_GROUPS: { label: string; nutrients: string[] }[] = [
+  { label: "主要栄養素", nutrients: ["fiber_g", "salt_g"] },
+  {
+    label: "ビタミン",
+    nutrients: [
+      "vitamin_a",
+      "vitamin_d",
+      "vitamin_e",
+      "vitamin_k",
+      "vitamin_b1",
+      "vitamin_b2",
+      "vitamin_b6",
+      "vitamin_b12",
+      "vitamin_c",
+      "niacin",
+      "folate",
+      "pantothenic_acid",
+    ],
+  },
+  { label: "ミネラル", nutrients: ["potassium", "calcium", "magnesium", "iron", "zinc"] },
+];

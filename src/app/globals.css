@@ -11,3 +11,325 @@ body {
   color: var(--foreground);
   background: var(--background);
 }
+
+/*
+ * ダッシュボード専用の「和紙×明朝体」テーマ。
+ * ユーザーが参考にした紙面デザインに合わせたスタイルで、他画面のTailwindスタイルと
+ * 衝突しないよう .washi-sheet 配下にスコープしている(意図的にライトテーマ固定)。
+ */
+.washi-sheet {
+  --paper: #f6f3ec;
+  --ink: #2b2a26;
+  --sub: #726a5c;
+  --line: #dcd4c2;
+  --indigo: #2f4858;
+  --clay: #b5562f;
+  --rice: #d8c184;
+  --ok: #5c7a4f;
+  --warn: #b5562f;
+  --mid: #b98d3e;
+
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-noto), sans-serif;
+  line-height: 1.7;
+  padding: 32px 24px 56px;
+  border-radius: 8px;
+}
+
+.washi-sheet .date-label {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--sub);
+  margin-bottom: 4px;
+}
+
+.washi-sheet h1 {
+  font-family: var(--font-shippori), serif;
+  font-weight: 700;
+  font-size: 32px;
+  margin: 0 0 6px;
+  color: var(--indigo);
+}
+
+.washi-sheet .lede {
+  color: var(--sub);
+  font-size: 13px;
+  margin-bottom: 28px;
+}
+
+.washi-sheet .kcal-row {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 18px 0;
+  margin-bottom: 28px;
+}
+
+.washi-sheet .kcal-num {
+  font-family: var(--font-shippori), serif;
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--indigo);
+}
+
+.washi-sheet .kcal-unit {
+  font-size: 14px;
+  color: var(--sub);
+}
+
+.washi-sheet .kcal-note {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--sub);
+  text-align: right;
+}
+
+.washi-sheet h2 {
+  font-family: var(--font-shippori), serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 14px;
+  color: var(--indigo);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.washi-sheet h2::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.washi-sheet h3 {
+  font-size: 12px;
+  color: var(--sub);
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  margin: 22px 0 10px;
+}
+
+.washi-sheet section {
+  margin-bottom: 32px;
+}
+
+.washi-sheet .pfc-item {
+  margin-bottom: 14px;
+}
+
+.washi-sheet .pfc-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.washi-sheet .pfc-head .name {
+  font-weight: 500;
+}
+
+.washi-sheet .pfc-head .val {
+  color: var(--sub);
+}
+
+.washi-sheet .bar-track {
+  height: 8px;
+  background: #e9e3d3;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.washi-sheet .bar-fill {
+  height: 100%;
+  border-radius: 4px;
+}
+
+.washi-sheet .bar-fill.p {
+  background: var(--indigo);
+}
+
+.washi-sheet .bar-fill.f {
+  background: var(--rice);
+}
+
+.washi-sheet .bar-fill.c {
+  background: var(--clay);
+}
+
+.washi-sheet .pfc-target {
+  font-size: 11px;
+  color: var(--sub);
+  margin-top: 4px;
+}
+
+.washi-sheet .meal {
+  border-left: 2px solid var(--line);
+  padding-left: 16px;
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.washi-sheet .meal::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--clay);
+}
+
+.washi-sheet .meal-time {
+  font-size: 12px;
+  color: var(--sub);
+  letter-spacing: 0.05em;
+}
+
+.washi-sheet .meal-name {
+  font-weight: 500;
+  margin: 2px 0 4px;
+  font-size: 14px;
+}
+
+.washi-sheet .meal-detail {
+  font-size: 12px;
+  color: var(--sub);
+}
+
+.washi-sheet .meal-kcal {
+  font-size: 12px;
+  color: var(--indigo);
+  margin-top: 4px;
+}
+
+.washi-sheet .nutrient-row {
+  display: grid;
+  grid-template-columns: 84px 1fr 92px 46px;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+}
+
+.washi-sheet .nutrient-row:last-child {
+  border-bottom: none;
+}
+
+.washi-sheet .nutrient-name {
+  font-weight: 500;
+}
+
+.washi-sheet .nutrient-track {
+  height: 7px;
+  background: #e9e3d3;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.washi-sheet .nutrient-fill {
+  height: 100%;
+  border-radius: 4px;
+}
+
+.washi-sheet .nutrient-fill.ok {
+  background: var(--ok);
+}
+
+.washi-sheet .nutrient-fill.mid {
+  background: var(--mid);
+}
+
+.washi-sheet .nutrient-fill.low,
+.washi-sheet .nutrient-fill.over {
+  background: var(--warn);
+}
+
+.washi-sheet .nutrient-val {
+  color: var(--sub);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.washi-sheet .nutrient-pct {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--sub);
+  font-size: 11px;
+}
+
+.washi-sheet .nutrient-pct.ok {
+  color: var(--ok);
+}
+
+.washi-sheet .nutrient-pct.low {
+  color: var(--warn);
+}
+
+.washi-sheet .legend {
+  display: flex;
+  gap: 16px;
+  font-size: 11px;
+  color: var(--sub);
+  margin: 4px 0 16px;
+  flex-wrap: wrap;
+}
+
+.washi-sheet .legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.washi-sheet .legend i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.washi-sheet .legend .ok {
+  background: var(--ok);
+}
+
+.washi-sheet .legend .mid {
+  background: var(--mid);
+}
+
+.washi-sheet .legend .low {
+  background: var(--warn);
+}
+
+.washi-sheet .callout {
+  background: #efe6d4;
+  border-left: 3px solid var(--clay);
+  padding: 14px 16px;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.washi-sheet .callout b {
+  color: var(--clay);
+}
+
+.washi-sheet .reco-list {
+  font-size: 13px;
+}
+
+.washi-sheet .reco-list li {
+  margin-bottom: 8px;
+}
+
+.washi-sheet footer {
+  font-size: 11px;
+  color: var(--sub);
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+  margin-top: 4px;
+}

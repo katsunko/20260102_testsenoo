@@ -114,6 +114,7 @@ export const RDA_NUTRIENT_KEY_MAP: Partial<Record<string, keyof NutrientTotals>>
   magnesium: "magnesium",
   potassium: "potassium",
   salt_g: "saltG",
+  fiber_g: "fiberG",
 };
 
 /** 食品成分表(100gあたり)を指定グラム数で按分した栄養素量を計算する。 */
