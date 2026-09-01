@@ -1,0 +1,62 @@
+name: Daily Article Draft
+
+on:
+  schedule:
+    # 21:00 UTC = 06:00 JST(毎日)
+    - cron: "0 21 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate-draft:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check required secret
+        run: |
+          if [ -z "${{ secrets.ANTHROPIC_API_KEY }}" ]; then
+            echo "::warning::ANTHROPIC_API_KEY is not set (Settings > Secrets and variables > Actions). Skipping draft generation for now."
+            echo "skip=true" >> "$GITHUB_ENV"
+          fi
+
+      - uses: actions/checkout@v4
+        if: env.skip != 'true'
+
+      - uses: actions/setup-node@v4
+        if: env.skip != 'true'
+        with:
+          node-version: 20
+
+      - name: Install bot dependencies
+        if: env.skip != 'true'
+        working-directory: bot
+        run: npm ci
+
+      - name: Generate draft article
+        if: env.skip != 'true'
+        working-directory: bot
+        run: npm run generate
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Open PR with the draft
+        if: env.skip != 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "記事下書きを自動生成"
+          branch: draft/daily-${{ github.run_id }}
+          title: "[レビュー待ち] 記事下書き ${{ github.run_number }}"
+          body: |
+            botが生成した記事下書きです。**そのまま公開しないでください。**
+
+            レビューチェックリスト:
+            - [ ] ラウンジの設備・営業時間などの事実確認
+            - [ ] アフィリエイトリンク・CTA文言の妥当性確認
+            - [ ] X投稿文案(記事frontmatterの `xPostDraft`)の確認・調整
+            - [ ] 問題なければこのPRをmerge(mergeすると自動でサイトがデプロイされます)
+
+            X投稿は自動化していません。公開後に `xPostDraft` の内容を手動でXに投稿するか、
+            `publish-to-x.yml` を手動実行してください(X API認証情報が設定済みの場合のみ)。
+          labels: draft-article

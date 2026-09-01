@@ -1,0 +1,67 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" href="data:," />
+  </head>
+  <body>
+    <header class="site-header">
+      <a href={import.meta.env.BASE_URL}>海外ラウンジガイド</a>
+    </header>
+    <main class="site-main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>
+        本サイトの記事にはアフィリエイト広告が含まれます。
+      </p>
+    </footer>
+    <style is:global>
+      body {
+        font-family: system-ui, -apple-system, "Hiragino Sans", sans-serif;
+        line-height: 1.7;
+        color: #222;
+        margin: 0;
+      }
+      .site-header,
+      .site-main,
+      .site-footer {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 1rem 1.25rem;
+      }
+      .site-header a {
+        font-weight: 700;
+        text-decoration: none;
+        color: #1f5f4a;
+      }
+      .site-footer {
+        font-size: 0.8rem;
+        color: #6b6455;
+        border-top: 1px solid #eee;
+        margin-top: 2rem;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 0.5rem;
+        text-align: left;
+      }
+    </style>
+  </body>
+</html>

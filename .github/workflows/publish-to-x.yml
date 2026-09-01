@@ -1,0 +1,48 @@
+name: Publish to X (manual only)
+
+# 【重要】このワークフローは workflow_dispatch のみをトリガーとする。
+# schedule/push トリガーを絶対に追加しないこと(半自動フローの「人間確認後に投稿」を
+# 担保する最後の砦がこのトリガー制約)。
+#
+# X API v2への投稿にはBasic以上の有料プラン契約が必要。契約・認証情報の設定が
+# 済むまでは、記事frontmatterの xPostDraft をコピペしてXへ手動投稿してください
+# (README参照)。
+
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "記事ファイル名(拡張子なし。例: 2026-09-01-example-lounge-report)"
+        required: true
+      url:
+        description: "公開済み記事のURL"
+        required: true
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check required secrets
+        run: |
+          if [ -z "${{ secrets.X_API_KEY }}" ]; then
+            echo "::error::X API credentials are not set. Add X_API_KEY / X_API_SECRET / X_ACCESS_TOKEN / X_ACCESS_SECRET as repository secrets, or post the xPostDraft manually to X instead."
+            exit 1
+          fi
+
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install bot dependencies
+        working-directory: bot
+        run: npm ci
+
+      - name: Post to X
+        working-directory: bot
+        run: npm run post-to-x -- --slug "${{ inputs.slug }}" --url "${{ inputs.url }}"
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
