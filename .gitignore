@@ -1,0 +1,8 @@
+node_modules/
+site/dist/
+site/.astro/
+*.log
+
+# 実体験メモは下書き素材のためコミット対象外(READMEは残す)
+bot/inputs/lounge-notes/*
+!bot/inputs/lounge-notes/README.md

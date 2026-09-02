@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleLayout from '../layouts/ArticleLayout.astro';
+
+const allArticles = await getCollection('articles', ({ data }) => import.meta.env.DEV || !data.draft);
+const sorted = allArticles.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<ArticleLayout title="海外ラウンジガイド | プライオリティパスで空港をもっと快適に">
+  <h1>海外ラウンジガイド</h1>
+  <p>
+    プライオリティパスで入れる海外の空港ラウンジを、1件ずつ実用ガイドとして紹介しています。
+    <a href={`${import.meta.env.BASE_URL}cards/priority-pass/`}>プライオリティパス付帯カード比較はこちら</a>
+  </p>
+
+  <ul>
+    {
+      sorted.map((article) => (
+        <li>
+          <a href={`${import.meta.env.BASE_URL}articles/${article.slug}/`}>{article.data.title}</a>
+          {article.data.draft && <span> (下書き)</span>}
+        </li>
+      ))
+    }
+  </ul>
+</ArticleLayout>
