@@ -1,0 +1,65 @@
+---
+import affiliateLinks from '../../../bot/config/affiliate-links.json';
+
+interface Props {
+  cardKey: string;
+  // UTM計測用。記事のslugなどを渡す。
+  campaign: string;
+  // その記事の文脈に沿った一言(botが生成した1〜2文)。省略時は汎用文言。
+  contextLine?: string;
+}
+
+const { cardKey, campaign, contextLine } = Astro.props;
+
+const link = (affiliateLinks as Record<string, { asp: string; programName: string; url: string }>)[
+  cardKey
+];
+
+const utmUrl = link
+  ? `${link.url}${link.url.includes('?') ? '&' : '?'}utm_source=blog&utm_medium=cta&utm_campaign=${encodeURIComponent(campaign)}`
+  : undefined;
+---
+
+{
+  link ? (
+    <aside class="card-cta">
+      <p class="card-cta__lead">
+        {contextLine ?? 'このラウンジ、実は年会費の追加負担なしで入れるカードがあります。'}
+      </p>
+      <a class="card-cta__button" href={utmUrl} rel="sponsored noopener" target="_blank">
+        {link.programName} を詳しく見る
+      </a>
+      <p class="card-cta__disclosure">
+        ※本リンクはアフィリエイト広告を含みます。カードの年会費・特典条件は必ず公式サイトでご確認ください。
+      </p>
+    </aside>
+  ) : null
+}
+
+<style>
+  .card-cta {
+    margin: 2rem 0;
+    padding: 1.25rem;
+    border: 1px solid #e0d9c8;
+    border-radius: 0.5rem;
+    background: #fbf7ee;
+  }
+  .card-cta__lead {
+    margin: 0 0 0.75rem;
+    font-weight: 600;
+  }
+  .card-cta__button {
+    display: inline-block;
+    padding: 0.6rem 1.25rem;
+    border-radius: 999px;
+    background: #1f5f4a;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .card-cta__disclosure {
+    margin: 0.75rem 0 0;
+    font-size: 0.75rem;
+    color: #6b6455;
+  }
+</style>

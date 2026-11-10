@@ -1,0 +1,69 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+const guide = await getEntry('guides', 'priority-pass-cards');
+if (!guide) {
+  throw new Error('guides/priority-pass-cards.md が見つかりません');
+}
+const { Content } = await guide.render();
+const { title, description, cards, relatedArticleSlugs } = guide.data;
+
+const allArticles = await getCollection('articles');
+const relatedArticles = relatedArticleSlugs
+  .map((slug) => allArticles.find((a) => a.slug === slug))
+  .filter((a): a is NonNullable<typeof a> => Boolean(a));
+---
+
+<ArticleLayout title={`${title} | 海外ラウンジガイド`} description={description}>
+  <article>
+    <h1>{title}</h1>
+    <p>{description}</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>カード名</th>
+          <th>年会費</th>
+          <th>プライオリティパス費用</th>
+          <th>同伴者無料回数</th>
+          <th>備考</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          cards.map((card) => (
+            <tr>
+              <td>{card.name}</td>
+              <td>{card.annualFeeJpy.toLocaleString()}円</td>
+              <td>{card.priorityPassFeeCovered ? '追加費用なし' : '別途費用あり'}</td>
+              <td>{card.guestFreeVisits}回</td>
+              <td>{card.notes}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+
+    <Content />
+
+    {
+      relatedArticles.length > 0 && (
+        <>
+          <h2>関連するラウンジガイド</h2>
+          <ul>
+            {relatedArticles.map((a) => (
+              <li>
+                <a href={`${import.meta.env.BASE_URL}articles/${a.slug}/`}>{a.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )
+    }
+
+    <p class="disclosure">
+      ※本ページはアフィリエイト広告を含みます。年会費・特典条件は変更される場合があるため、必ず公式サイトで最新情報をご確認ください。
+    </p>
+  </article>
+</ArticleLayout>

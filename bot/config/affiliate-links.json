@@ -1,0 +1,18 @@
+{
+  "_comment": "アフィリエイトリンクのキー管理。LLMにはキー名だけを選ばせ、URLはここから解決する(URLをLLMに生成・幻覚させない)。値は全てプレースホルダーなので、ASP審査通過後に実URLへ差し替えること。",
+  "priority_pass": {
+    "asp": "a8net",
+    "programName": "(例)プラチナ系カードA",
+    "url": "https://px.a8.net/svt/ejp?a8mat=PLACEHOLDER_PRIORITY_PASS"
+  },
+  "travel_card_amex": {
+    "asp": "moshimo",
+    "programName": "(例)トラベル特化カードB",
+    "url": "https://af.moshimo.com/af/c/click?a_id=PLACEHOLDER_TRAVEL_CARD"
+  },
+  "travel_card_saison": {
+    "asp": "valuecommerce",
+    "programName": "(例)SAISON系カードC",
+    "url": "https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=PLACEHOLDER&pid=PLACEHOLDER"
+  }
+}

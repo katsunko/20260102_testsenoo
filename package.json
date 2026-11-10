@@ -1,0 +1,8 @@
+{
+  "name": "daily-article-bot-workspace",
+  "private": true,
+  "workspaces": [
+    "site",
+    "bot"
+  ]
+}
